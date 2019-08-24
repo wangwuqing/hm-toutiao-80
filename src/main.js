@@ -8,11 +8,15 @@ import './styles/index.less'
 import App from './App.vue'
 // @是vue-cli 提供的src绝对路径别名
 import router from './router/routeu'
+
+// 简单配置axios
+import axios from 'axios'
+Vue.prototype.$http = axios
+
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 new Vue({
-  el: '#app',
 
   router,
 

@@ -4,12 +4,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Login from '../views/login/index.vue'
+import Home from '../views/hone/index.vue'
 // 注册
 Vue.use(VueRouter)
 // 初始化router对象
 const router = new VueRouter({
   routes: [
-    { path: '/login', name: 'login', component: Login }
+    { path: '/login', name: 'login', component: Login },
+
+    { path: '/', name: 'home', component: Home }
   ]
 })
 // 导出
