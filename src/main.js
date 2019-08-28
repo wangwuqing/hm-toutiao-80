@@ -10,7 +10,7 @@ import App from './App.vue'
 import router from './router/routeu'
 
 // 简单配置axios
-import axios from 'axios'
+import axios from './api'
 Vue.prototype.$http = axios
 
 Vue.use(ElementUI)

@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import store from '../store'
+
 export default {
 
   data () {
@@ -37,8 +39,8 @@ export default {
     return {
       // 表单数据
       loginForm: {
-        mobile: '',
-        code: ''
+        mobile: '13456789123',
+        code: '246810'
       },
       loginRules: {
         mobile: [
@@ -57,17 +59,28 @@ export default {
   methods: {
     login () {
       // 调用 validate 对整体表进行校验
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
-            .then(res => {
-              // 成功 跳转
-              this.$router.push('/')
-            })
-            .catch(() => {
-              // 失败
-              this.$message.error('手机号或验证码错误')
-            })
+          // this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+          // .then(res => {
+          //   // 成功 跳转
+          //   // console.log(res)
+          //   // return
+          //   store.setUser(res.data.data)
+          //   this.$router.push('/')
+          // })
+          // .catch(() => {
+
+          //   // 失败
+          //   this.$message.error('手机号或验证码错误')
+          // })
+          try {
+            const { data: { data } } = await this.$http.post('authorizations', this.loginForm)
+            store.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机号或验证码错误')
+          }
         }
       })
     }
